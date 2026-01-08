@@ -17,11 +17,13 @@ install_default_filebeat_configs:
   file.managed:
     - source: salt://log_management/configs/filebeat.yml
     - name: /etc/filebeat/filebeat.yml
+    - template: jinja
 
 install_default_metricbeat_configs:
   file.managed:
     - source: salt://log_management/configs/metricbeat.yml
     - name: /etc/metricbeat/metricbeat.yml
+    - template: jinja
 
 enable_default_metricbeat_modules:
   cmd.run:

@@ -4,7 +4,10 @@ metricbeat.config.modules:
 setup.template.settings:
   index.number_of_shards: 1
   index.codec: best_compression
-output.logstash:
-  hosts: ["sea-logstash01.coyhile.com:5044"]
+outputs.elasticsearch:
+  hosts:
+    {% for host in salt['pillar.get']('es_outputs:hosts') -%}
+    - {{ host }}
+  api_key: {{ grains['es_outputs']['api_key'] }}
 processors:
   - add_host_metadata: ~
