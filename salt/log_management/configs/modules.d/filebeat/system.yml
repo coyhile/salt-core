@@ -1,0 +1,10 @@
+- module: system
+  syslog:
+    enabled: true
+    var.paths:
+      #      - /var/log/syslog
+      #- /var/log/kern.log
+  auth:
+    enabled: true
+    var.paths:
+      - /var/log/auth.log
