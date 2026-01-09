@@ -8,10 +8,7 @@ filebeat.config.modules:
   path: ${path.config}/modules.d/*.yml
   reload.enabled: true
 output.elasticsearch:
-  hosts: 
-   {% for host in salt['pillar.get']('es_outputs:hosts') -%}
-   - {{ host }}
-   {% endfor -%}
+  hosts: [ {{ salt['pillar.get']('es_outputs:hosts') | join(',') }} ]
   api_key: {{ pillar['es_outputs']['api_key'] }}
 
 processors:

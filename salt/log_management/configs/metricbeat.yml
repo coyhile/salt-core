@@ -5,9 +5,7 @@ setup.template.settings:
   index.number_of_shards: 1
   index.codec: best_compression
 outputs.elasticsearch:
-  hosts:
-    {% for host in salt['pillar.get']('es_outputs:hosts') -%}
-    - {{ host }}
+  hosts: [ {{ grains['es_outputs'['hosts'] | join(',') }} ]
   api_key: {{ grains['es_outputs']['api_key'] }}
 processors:
   - add_host_metadata: ~
