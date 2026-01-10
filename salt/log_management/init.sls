@@ -25,7 +25,6 @@ install_default_metricbeat_configs:
     - name: /etc/metricbeat/metricbeat.yml
     - template: jinja
 
-{% if not salt['file.file_exists']('/etc/filebeat/modules.d/system.yml') %}
 customize_system_module:
   file.managed:
     - name: /etc/filebeat/modules.d/system.yml
@@ -40,4 +39,3 @@ filebeat:
   service.running:
     - enable: True
     - reload: True
-{% endif %}
